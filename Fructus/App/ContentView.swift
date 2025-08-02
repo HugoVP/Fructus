@@ -8,17 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    var fruits = fruitsData
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            List {
+                ForEach(fruits.shuffled()) { item in
+                    NavigationLink(destination: FruitDetailView(fruit: item)) {
+                        FruitRowView(fruit: item)
+                            .padding(.vertical, 4)
+                    }
+                }
+            }
+            .navigationTitle("Fruits")
         }
-        .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(fruits: fruitsData)
 }
